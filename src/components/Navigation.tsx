@@ -2,6 +2,7 @@ import { NeumorphicButton } from "@/components/NeumorphicButton";
 import { ViewMode } from "@/types";
 import { Calendar, Home, BarChart3, Moon, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
+import dayOneLogo from "@/assets/dayone-logo.png";
 
 interface NavigationProps {
   currentView: ViewMode;
@@ -23,9 +24,13 @@ export function Navigation({ currentView, onViewChange, darkMode, onToggleDarkMo
         {/* Logo/Title */}
         <div className="flex items-center gap-2 sm:gap-3">
           <div className="neumorphic p-2 sm:p-3">
-            <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-br from-primary to-accent rounded-lg" />
+            <img 
+              src={dayOneLogo} 
+              alt="DayOne Logo" 
+              className="w-6 h-6 sm:w-7 sm:h-7 object-contain"
+            />
           </div>
-          <h1 className="text-lg sm:text-xl font-bold text-gradient no-select">DayOne</h1>
+          <h1 className="text-lg sm:text-xl font-bold text-foreground no-select">DayOne</h1>
         </div>
 
         {/* Navigation Items */}
