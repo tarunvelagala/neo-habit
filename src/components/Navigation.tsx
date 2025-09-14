@@ -18,18 +18,18 @@ const navItems = [
 
 export function Navigation({ currentView, onViewChange, darkMode, onToggleDarkMode }: NavigationProps) {
   return (
-    <nav className="neumorphic p-2 mb-8">
+    <nav className="neumorphic p-3 mb-6 sm:mb-8">
       <div className="flex items-center justify-between">
         {/* Logo/Title */}
-        <div className="flex items-center gap-3">
-          <div className="neumorphic p-3">
-            <div className="w-6 h-6 bg-gradient-to-br from-primary to-accent rounded-lg" />
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="neumorphic p-2 sm:p-3">
+            <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-br from-primary to-accent rounded-lg" />
           </div>
-          <h1 className="text-xl font-bold text-gradient">DayOne</h1>
+          <h1 className="text-lg sm:text-xl font-bold text-gradient no-select">DayOne</h1>
         </div>
 
         {/* Navigation Items */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = currentView === item.id;
@@ -42,25 +42,26 @@ export function Navigation({ currentView, onViewChange, darkMode, onToggleDarkMo
                 pressed={isActive}
                 onClick={() => onViewChange(item.id)}
                 className={cn(
-                  "flex items-center gap-2",
+                  "flex items-center gap-1 sm:gap-2 px-2 sm:px-3 touch-target no-select",
                   isActive && "text-accent-foreground"
                 )}
               >
                 <Icon className="w-4 h-4" />
-                <span className="hidden sm:inline">{item.label}</span>
+                <span className="hidden xs:inline text-xs sm:text-sm">{item.label}</span>
               </NeumorphicButton>
             );
           })}
           
           {/* Dark mode toggle */}
-          <div className="w-px h-6 bg-border mx-2" />
+          <div className="w-px h-4 sm:h-6 bg-border mx-1 sm:mx-2" />
           <NeumorphicButton
             variant="ghost"
             size="sm"
             onClick={onToggleDarkMode}
-            className="flex items-center gap-2"
+            className="flex items-center gap-1 sm:gap-2 touch-target no-select"
           >
             {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            <span className="sr-only">Toggle dark mode</span>
           </NeumorphicButton>
         </div>
       </div>

@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navigation } from "@/components/Navigation";
 import { TodayView } from "@/pages/TodayView";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { useMobile } from "@/hooks/useMobile";
 import { Habit, JournalEntry, ViewMode, AppState } from "@/types";
 import { format } from "date-fns";
 import { toast } from "sonner";
@@ -21,11 +22,19 @@ const initialState: AppState = {
 
 const App = () => {
   const [appState, setAppState] = useLocalStorage<AppState>('dayone-app-state', initialState);
+  const { isNative, hapticLight, hapticMedium, setStatusBarLight, setStatusBarDark } = useMobile();
 
-  // Apply dark mode to document
+  // Apply dark mode to document and status bar
   useEffect(() => {
     document.documentElement.classList.toggle('dark', appState.darkMode);
-  }, [appState.darkMode]);
+    if (isNative) {
+      if (appState.darkMode) {
+        setStatusBarLight(); // Light status bar for dark mode
+      } else {
+        setStatusBarDark(); // Dark status bar for light mode
+      }
+    }
+  }, [appState.darkMode, isNative, setStatusBarLight, setStatusBarDark]);
 
   // Handlers
   const handleViewChange = (view: ViewMode) => {
@@ -75,6 +84,13 @@ const App = () => {
     const habit = appState.habits.find(h => h.id === habitId);
     const isCompleted = habit?.completions.includes(today);
     
+    // Add haptic feedback for mobile
+    if (isCompleted) {
+      hapticLight(); // Light haptic for unmarking
+    } else {
+      hapticMedium(); // Medium haptic for completing
+    }
+    
     toast.success(
       isCompleted 
         ? `Unmarked "${habit?.name}"` 
@@ -119,8 +135,8 @@ const App = () => {
 
   return (
     <TooltipProvider>
-      <div className="min-h-screen bg-background">
-        <div className="max-w-4xl mx-auto p-4">
+      <div className="min-h-screen bg-background safe-area-top safe-area-bottom">
+        <div className="max-w-4xl mx-auto p-4 safe-area-left safe-area-right">
           <Navigation
             currentView={appState.currentView}
             onViewChange={handleViewChange}
