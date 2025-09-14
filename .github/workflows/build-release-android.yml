@@ -1,61 +1,98 @@
 name: Build Android Release
 
 on:
-  workflow_dispatch: # Can trigger manually
+  workflow_dispatch: # Manual trigger
   push:
     tags:
-      - "v*" # Example: v1.0.0
+      - "v*" # Trigger on tags like v1.0.0
 
 jobs:
   build-android:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    env:
+      JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
 
-      - name: Set up Node.js
+    steps:
+      # 1️⃣ Checkout repo
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: "20"
+          node-version: 20
 
-      - name: Install dependencies
+      # 3️⃣ Cache node_modules
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # 4️⃣ Install npm dependencies
+      - name: Install npm dependencies
         run: npm install
 
-      - name: Build web assets
+      # 5️⃣ Build web assets
+      - name: Build frontend
         run: npm run build
 
+      # 6️⃣ Install Capacitor CLI
       - name: Install Capacitor CLI
         run: npm install -g @capacitor/cli
 
+      # 7️⃣ Sync Capacitor Android
       - name: Sync Capacitor Android
         run: npx cap sync android
 
-      - name: Set up JDK
+      # 8️⃣ Set up JDK 17
+      - name: Setup JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: "17"
+          java-version: 17
 
+      # 9️⃣ Cache Gradle
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper/
+          key: ${{ runner.os }}-gradle-${{ hashFiles('android/gradle/wrapper/gradle-wrapper.properties') }}
+
+      # 🔑 10️⃣ Decode Keystore
       - name: Decode Keystore
         run: |
+          mkdir -p android/app
           echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > android/app/release.keystore
 
-      - name: Build Signed APK
+      # 11️⃣ Ensure Gradle uses Java 17
+      - name: Set Gradle JDK
+        run: echo "org.gradle.java.home=$JAVA_HOME_17_X64" >> android/gradle.properties
+
+      # 12️⃣ Build signed release APK
+      - name: Build Android Release APK
         working-directory: android
         run: |
           ./gradlew assembleRelease \
             -Pandroid.injected.signing.store.file=app/release.keystore \
             -Pandroid.injected.signing.store.password=$ANDROID_KEYSTORE_PASSWORD \
             -Pandroid.injected.signing.key.alias=$ANDROID_KEY_ALIAS \
-            -Pandroid.injected.signing.key.password=$ANDROID_KEY_PASSWORD
+            -Pandroid.injected.signing.key.password=$ANDROID_KEY_PASSWORD \
+            -Dorg.gradle.java.home=$JAVA_HOME_17_X64
 
+      # 13️⃣ Upload APK artifact
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: android-release-apk
           path: android/app/build/outputs/apk/release/app-release.apk
 
+      # 14️⃣ Create GitHub release
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
