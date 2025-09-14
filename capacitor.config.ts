@@ -1,10 +1,9 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'app.lovable.2f36f952c36946f1b512f5e2c855c367',
-  appName: 'neo-habit',
+  appId: 'com.vtkr.dayone',
+  appName: 'DayOne',
   webDir: 'dist',
-  bundledWebRuntime: false,
   server: {
     url: 'https://2f36f952-c369-46f1-b512-f5e2c855c367.lovableproject.com?forceHideBadge=true',
     cleartext: true
