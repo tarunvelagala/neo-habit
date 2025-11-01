@@ -6,132 +6,132 @@
 
 @layer base {
   :root {
-    /* Base Colors - Seashell Peach & White Smoke */
-    --background: 44 100% 93%;
-    --foreground: 0 0% 15%;
+    /* Neumorphism Base Colors */
+    --background: 225 25% 95%;
+    --foreground: 215 25% 25%;
     
-    /* Surface Colors - Light variations */
-    --surface: 44 100% 93%;
-    --surface-dark: 44 50% 88%;
-    --surface-light: 44 100% 96%;
+    /* Neumorphic Surface Colors */
+    --surface: 225 25% 95%;
+    --surface-dark: 225 25% 88%;
+    --surface-light: 225 25% 98%;
     
-    /* Card Colors */
-    --card: 0 0% 95%;
-    --card-foreground: 0 0% 15%;
+    /* Card Colors for Depth */
+    --card: 225 25% 95%;
+    --card-foreground: 215 25% 25%;
     
-    /* Primary Brand Colors - Blue */
-    --primary: 214 89% 61%;
+    /* Primary Brand Colors - Teal from logo */
+    --primary: 187 25% 50%;
     --primary-foreground: 0 0% 100%;
-    --primary-soft: 214 60% 85%;
+    --primary-soft: 187 15% 85%;
     
-    /* Success - Green */
-    --success: 142 64% 40%;
+    /* Success (for streaks and habits) */
+    --success: 187 35% 45%;
     --success-foreground: 0 0% 100%;
-    --success-soft: 142 45% 85%;
+    --success-soft: 187 20% 85%;
     
-    /* Warning - Yellow/Orange */
-    --warning: 34 87% 51%;
+    /* Warning (for incomplete habits) */
+    --warning: 25 85% 60%;
     --warning-foreground: 0 0% 100%;
-    --warning-soft: 34 55% 85%;
+    --warning-soft: 25 45% 85%;
     
-    /* Secondary Colors - Granny Apple Mint */
-    --secondary: 142 61% 86%;
-    --secondary-foreground: 0 0% 15%;
+    /* Secondary Colors - Gray from logo */
+    --secondary: 0 0% 50%;
+    --secondary-foreground: 0 0% 100%;
     
     /* Muted Colors */
-    --muted: 0 0% 90%;
+    --muted: 220 10% 88%;
     --muted-foreground: 0 0% 45%;
     
-    /* Accent Colors - Mint Green */
-    --accent: 142 61% 86%;
-    --accent-foreground: 0 0% 15%;
-    --accent-soft: 142 45% 92%;
+    /* Accent Colors - Complementary to teal */
+    --accent: 187 25% 50%;
+    --accent-foreground: 0 0% 100%;
+    --accent-soft: 187 15% 85%;
     
-    /* Utility Colors - Red */
-    --destructive: 4 82% 56%;
+    /* Utility Colors */
+    --destructive: 0 80% 60%;
     --destructive-foreground: 0 0% 100%;
     
     /* Popover */
-    --popover: 0 0% 96%;
-    --popover-foreground: 0 0% 15%;
+    --popover: 225 25% 96%;
+    --popover-foreground: 215 25% 25%;
     
     /* Border and Input */
-    --border: 0 0% 85%;
-    --input: 0 0% 92%;
-    --ring: 214 89% 61%;
+    --border: 225 15% 82%;
+    --input: 225 25% 92%;
+    --ring: 215 85% 60%;
     
-    /* Shadows */
+    /* Neumorphic Shadows */
     --shadow-light: 0 0% 100%;
-    --shadow-dark: 0 0% 80%;
+    --shadow-dark: 220 15% 80%;
     
     --radius: 1rem;
     
     /* Sidebar */
-    --sidebar-background: 0 0% 95%;
-    --sidebar-foreground: 0 0% 15%;
-    --sidebar-primary: 214 89% 61%;
+    --sidebar-background: 225 25% 92%;
+    --sidebar-foreground: 215 25% 25%;
+    --sidebar-primary: 215 85% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 142 61% 86%;
-    --sidebar-accent-foreground: 0 0% 15%;
-    --sidebar-border: 0 0% 85%;
-    --sidebar-ring: 214 89% 61%;
+    --sidebar-accent: 225 15% 85%;
+    --sidebar-accent-foreground: 215 25% 35%;
+    --sidebar-border: 225 15% 82%;
+    --sidebar-ring: 215 85% 60%;
   }
 
   .dark {
-    /* Dark Mode */
-    --background: 0 0% 12%;
-    --foreground: 0 0% 90%;
+    /* Dark Mode Neumorphism */
+    --background: 220 15% 15%;
+    --foreground: 225 25% 85%;
     
-    --surface: 0 0% 12%;
-    --surface-dark: 0 0% 10%;
-    --surface-light: 0 0% 15%;
+    --surface: 220 15% 15%;
+    --surface-dark: 220 15% 12%;
+    --surface-light: 220 15% 18%;
     
-    --card: 0 0% 12%;
-    --card-foreground: 0 0% 90%;
+    --card: 220 15% 15%;
+    --card-foreground: 225 25% 85%;
     
-    --primary: 214 89% 65%;
+    --primary: 187 25% 55%;
     --primary-foreground: 0 0% 100%;
-    --primary-soft: 214 45% 25%;
+    --primary-soft: 187 15% 25%;
     
-    --success: 142 64% 45%;
+    --success: 187 35% 50%;
     --success-foreground: 0 0% 100%;
-    --success-soft: 142 40% 25%;
+    --success-soft: 187 20% 25%;
     
-    --warning: 34 87% 55%;
+    --warning: 25 80% 65%;
     --warning-foreground: 0 0% 100%;
-    --warning-soft: 34 55% 25%;
+    --warning-soft: 25 35% 25%;
     
-    --secondary: 142 40% 30%;
-    --secondary-foreground: 0 0% 90%;
+    --secondary: 0 0% 45%;
+    --secondary-foreground: 0 0% 85%;
     
-    --muted: 0 0% 18%;
+    --muted: 220 15% 20%;
     --muted-foreground: 0 0% 60%;
     
-    --accent: 142 50% 40%;
+    --accent: 187 25% 55%;
     --accent-foreground: 0 0% 100%;
-    --accent-soft: 142 35% 22%;
+    --accent-soft: 187 15% 25%;
     
-    --destructive: 4 82% 60%;
+    --destructive: 0 75% 65%;
     --destructive-foreground: 0 0% 100%;
     
-    --popover: 0 0% 15%;
-    --popover-foreground: 0 0% 90%;
+    --popover: 220 15% 16%;
+    --popover-foreground: 225 25% 85%;
     
-    --border: 0 0% 22%;
-    --input: 0 0% 15%;
-    --ring: 214 89% 65%;
+    --border: 220 15% 25%;
+    --input: 220 15% 18%;
+    --ring: 215 85% 65%;
     
-    --shadow-light: 0 0% 18%;
-    --shadow-dark: 0 0% 8%;
+    --shadow-light: 220 15% 20%;
+    --shadow-dark: 220 15% 10%;
     
-    --sidebar-background: 0 0% 12%;
-    --sidebar-foreground: 0 0% 90%;
-    --sidebar-primary: 214 89% 65%;
+    --sidebar-background: 220 15% 12%;
+    --sidebar-foreground: 225 25% 85%;
+    --sidebar-primary: 215 85% 65%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 142 50% 40%;
-    --sidebar-accent-foreground: 0 0% 90%;
-    --sidebar-border: 0 0% 22%;
-    --sidebar-ring: 214 89% 65%;
+    --sidebar-accent: 220 15% 20%;
+    --sidebar-accent-foreground: 225 25% 75%;
+    --sidebar-border: 220 15% 25%;
+    --sidebar-ring: 215 85% 65%;
   }
 }
 
