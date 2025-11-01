@@ -27,7 +27,7 @@ export function Navigation({ currentView, onViewChange, darkMode, onToggleDarkMo
             <img 
               src={dayOneLogo} 
               alt="DayOne Logo" 
-              className="w-6 h-6 sm:w-7 sm:h-7 object-contain"
+              className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
             />
           </div>
           <h1 className="text-lg sm:text-xl font-bold text-foreground no-select">DayOne</h1>
