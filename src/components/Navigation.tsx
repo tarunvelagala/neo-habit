@@ -3,6 +3,7 @@ import { ViewMode } from "@/types";
 import { Calendar, Home, BarChart3, Moon, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
 import dayOneLogo from "@/assets/dayone-logo.png";
+import dayOneLogoDark from "@/assets/dayone-logo-dark.png";
 
 interface NavigationProps {
   currentView: ViewMode;
@@ -25,7 +26,7 @@ export function Navigation({ currentView, onViewChange, darkMode, onToggleDarkMo
         <div className="flex items-center gap-2 sm:gap-3">
           <div className="neumorphic p-2 sm:p-3">
             <img 
-              src={dayOneLogo} 
+              src={darkMode ? dayOneLogoDark : dayOneLogo} 
               alt="DayOne Logo" 
               className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
             />
