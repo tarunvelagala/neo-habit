@@ -10,10 +10,10 @@ interface NeumorphicButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> 
 
 export const NeumorphicButton = forwardRef<HTMLButtonElement, NeumorphicButtonProps>(
   ({ className, variant = 'default', size = 'md', pressed = false, children, ...props }, ref) => {
-    const baseStyles = pressed ? 'neumorphic-pressed' : 'neumorphic-button';
+    const baseStyles = 'flat-button';
     
     const variantStyles = {
-      default: 'text-foreground',
+      default: 'text-foreground bg-muted hover:bg-muted/80',
       success: 'text-success-foreground bg-success hover:bg-success/90',
       warning: 'text-warning-foreground bg-warning hover:bg-warning/90', 
       accent: 'text-accent-foreground bg-accent hover:bg-accent/90',
@@ -33,6 +33,7 @@ export const NeumorphicButton = forwardRef<HTMLButtonElement, NeumorphicButtonPr
           baseStyles,
           variantStyles[variant],
           sizeStyles[size],
+          pressed && 'opacity-70',
           'font-medium focus:outline-none focus:ring-2 focus:ring-primary/20',
           className
         )}

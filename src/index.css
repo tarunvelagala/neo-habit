@@ -156,73 +156,28 @@
 }
 
 @layer components {
-  /* Neumorphic Base Styles */
-  .neumorphic {
-    background: hsl(var(--card));
-    box-shadow: 
-      8px 8px 16px hsl(var(--shadow-dark) / 0.3),
-      -8px -8px 16px hsl(var(--shadow-light) / 0.8);
-    border-radius: var(--radius);
-  }
-  
-  .neumorphic-inset {
-    background: hsl(var(--card));
-    box-shadow: 
-      inset 4px 4px 8px hsl(var(--shadow-dark) / 0.3),
-      inset -4px -4px 8px hsl(var(--shadow-light) / 0.8);
-    border-radius: calc(var(--radius) - 4px);
-  }
-  
-  .neumorphic-pressed {
-    background: hsl(var(--card));
-    box-shadow: 
-      inset 6px 6px 12px hsl(var(--shadow-dark) / 0.4),
-      inset -6px -6px 12px hsl(var(--shadow-light) / 0.9);
-    border-radius: var(--radius);
-  }
-  
-  /* Neumorphic Button Styles */
-  .neumorphic-button {
-    @apply neumorphic transition-all duration-200 ease-in-out;
-    /* Better touch targets for mobile */
+  /* Flat Minimal Button Styles */
+  .flat-button {
+    @apply transition-all duration-200 ease-in-out rounded-md;
     min-height: 44px;
     min-width: 44px;
   }
   
-  .neumorphic-button:hover {
-    transform: translateY(-1px);
-    box-shadow: 
-      10px 10px 20px hsl(var(--shadow-dark) / 0.35),
-      -10px -10px 20px hsl(var(--shadow-light) / 0.85);
+  .flat-button:hover {
+    @apply opacity-90;
   }
   
-  .neumorphic-button:active {
-    @apply neumorphic-pressed;
-    transform: translateY(1px);
-  }
-  
-  /* Mobile-specific touch states */
-  @media (hover: none) and (pointer: coarse) {
-    .neumorphic-button:hover {
-      transform: none;
-    }
-    
-    .neumorphic-button:active {
-      @apply neumorphic-pressed;
-      transform: scale(0.98);
-    }
+  .flat-button:active {
+    @apply opacity-80 scale-[0.98];
   }
   
   /* Habit Card Styles */
   .habit-card {
-    @apply neumorphic p-6 transition-all duration-300;
+    @apply bg-card border border-border p-6 rounded-lg transition-all duration-300;
   }
   
   .habit-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 
-      12px 12px 24px hsl(var(--shadow-dark) / 0.4),
-      -12px -12px 24px hsl(var(--shadow-light) / 0.9);
+    @apply opacity-95;
   }
   
   /* Streak Grid Styles */
@@ -231,21 +186,11 @@
   }
   
   .streak-cell-empty {
-    @apply streak-cell neumorphic-inset;
-    background: hsl(var(--muted));
+    @apply streak-cell bg-muted;
   }
   
   .streak-cell-filled {
-    @apply streak-cell;
-    background: hsl(var(--success));
-    box-shadow: 
-      2px 2px 4px hsl(var(--shadow-dark) / 0.3),
-      -1px -1px 2px hsl(var(--shadow-light) / 0.6);
-  }
-  
-  /* Input Styles */
-  .neumorphic-input {
-    @apply neumorphic-inset bg-transparent border-0 focus:ring-2 focus:ring-primary/20;
+    @apply streak-cell bg-success;
   }
 }
 
