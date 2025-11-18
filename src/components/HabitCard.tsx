@@ -1,5 +1,6 @@
 import { NeumorphicCard } from "@/components/NeumorphicCard";
 import { NeumorphicButton } from "@/components/NeumorphicButton";
+import { StreakGrid } from "@/components/StreakGrid";
 import { Habit, StreakData } from "@/types";
 import { Check, Flame, Calendar, Target, Trash2 } from "lucide-react";
 import { format, isToday, parseISO } from "date-fns";
@@ -106,31 +107,9 @@ export function HabitCard({ habit, streakData, isCompleted, onToggleComplete, on
         </div>
       </div>
 
-      {/* Mini Streak Visualization */}
-      <div className="flex gap-1">
-        {Array.from({ length: 7 }, (_, i) => {
-          const dayOffset = 6 - i; // Start from 6 days ago
-          const targetDate = new Date(today);
-          targetDate.setDate(today.getDate() - dayOffset);
-          
-          const hasCompletion = recentCompletions.some(date => 
-            date && format(date, 'yyyy-MM-dd') === format(targetDate, 'yyyy-MM-dd')
-          );
-          
-          const isCurrentDay = isToday(targetDate);
-          
-          return (
-            <div
-              key={i}
-              className={cn(
-                "flex-1 h-2 rounded-sm",
-                hasCompletion ? 'streak-cell-filled' : 'streak-cell-empty',
-                isCurrentDay && 'ring-1 ring-primary/50'
-              )}
-              title={format(targetDate, 'MMM d')}
-            />
-          );
-        })}
+      {/* Streak Grid Visualization (7 days) */}
+      <div className="mt-2">
+        <StreakGrid completions={habit.completions} days={7} />
       </div>
     </NeumorphicCard>
   );

@@ -4,6 +4,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navigation } from "@/components/Navigation";
 import { TodayView } from "@/pages/TodayView";
+import { WeeklyView } from "@/pages/WeeklyView";
+import { OverallView } from "@/pages/OverallView";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useMobile } from "@/hooks/useMobile";
 import { Habit, JournalEntry, ViewMode, AppState } from "@/types";
@@ -170,17 +172,18 @@ const App = () => {
             )}
             
             {appState.currentView === 'weekly' && (
-              <div className="text-center py-12">
-                <h2 className="text-2xl font-bold mb-4">Weekly View</h2>
-                <p className="text-muted-foreground">Coming soon! This will show weekly habit trends and statistics.</p>
-              </div>
+              <WeeklyView
+                habits={appState.habits}
+                journalEntries={appState.journalEntries}
+                selectedDate={appState.selectedDate}
+              />
             )}
             
             {appState.currentView === 'overall' && (
-              <div className="text-center py-12">
-                <h2 className="text-2xl font-bold mb-4">Overall Statistics</h2>
-                <p className="text-muted-foreground">Coming soon! This will show lifetime stats, streaks, and journal archive.</p>
-              </div>
+              <OverallView
+                habits={appState.habits}
+                journalEntries={appState.journalEntries}
+              />
             )}
           </main>
         </div>
