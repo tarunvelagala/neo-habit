@@ -12,6 +12,7 @@ interface TodayViewProps {
   journalEntries: JournalEntry[];
   onAddHabit: (habit: Omit<Habit, 'id' | 'createdAt' | 'completions'>) => void;
   onToggleHabit: (habitId: string) => void;
+  onDeleteHabit: (habitId: string) => void;
   onSaveJournal: (content: string) => void;
   selectedDate: string;
 }
@@ -20,7 +21,8 @@ export function TodayView({
   habits, 
   journalEntries, 
   onAddHabit, 
-  onToggleHabit, 
+  onToggleHabit,
+  onDeleteHabit, 
   onSaveJournal,
   selectedDate 
 }: TodayViewProps) {
@@ -163,6 +165,7 @@ export function TodayView({
                   streakData={streakData}
                   isCompleted={isHabitCompleted(habit.id)}
                   onToggleComplete={onToggleHabit}
+                  onDelete={onDeleteHabit}
                 />
               );
             })}

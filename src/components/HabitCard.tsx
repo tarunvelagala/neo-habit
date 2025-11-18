@@ -1,7 +1,7 @@
 import { NeumorphicCard } from "@/components/NeumorphicCard";
 import { NeumorphicButton } from "@/components/NeumorphicButton";
 import { Habit, StreakData } from "@/types";
-import { Check, Flame, Calendar, Target } from "lucide-react";
+import { Check, Flame, Calendar, Target, Trash2 } from "lucide-react";
 import { format, isToday, parseISO } from "date-fns";
 import { cn } from "@/lib/utils";
 
@@ -10,10 +10,11 @@ interface HabitCardProps {
   streakData: StreakData;
   isCompleted: boolean;
   onToggleComplete: (habitId: string) => void;
+  onDelete?: (habitId: string) => void;
   onEdit?: (habit: Habit) => void;
 }
 
-export function HabitCard({ habit, streakData, isCompleted, onToggleComplete, onEdit }: HabitCardProps) {
+export function HabitCard({ habit, streakData, isCompleted, onToggleComplete, onDelete, onEdit }: HabitCardProps) {
   const today = new Date();
   const todayStr = format(today, 'yyyy-MM-dd');
   
@@ -43,22 +44,38 @@ export function HabitCard({ habit, streakData, isCompleted, onToggleComplete, on
           )}
         </div>
         
-        {/* Completion Button */}
-        <NeumorphicButton
-          variant={isCompleted ? 'success' : 'default'}
-          size="sm"
-          pressed={isCompleted}
-          onClick={(e) => {
-            e.stopPropagation();
-            onToggleComplete(habit.id);
-          }}
-          className={cn(
-            "ml-4 flex-shrink-0",
-            isCompleted && "bg-success hover:bg-success/90"
+        <div className="flex items-center gap-2 ml-4 flex-shrink-0">
+          {/* Delete Button */}
+          {onDelete && (
+            <NeumorphicButton
+              variant="ghost"
+              size="sm"
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete(habit.id);
+              }}
+              className="text-destructive hover:text-destructive"
+            >
+              <Trash2 className="w-4 h-4" />
+            </NeumorphicButton>
           )}
-        >
-          <Check className="w-4 h-4" />
-        </NeumorphicButton>
+          
+          {/* Completion Button */}
+          <NeumorphicButton
+            variant={isCompleted ? 'success' : 'default'}
+            size="sm"
+            pressed={isCompleted}
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleComplete(habit.id);
+            }}
+            className={cn(
+              isCompleted && "bg-success hover:bg-success/90"
+            )}
+          >
+            <Check className="w-4 h-4" />
+          </NeumorphicButton>
+        </div>
       </div>
 
       {/* Stats Row */}

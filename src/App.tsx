@@ -98,6 +98,18 @@ const App = () => {
     );
   };
 
+  const handleDeleteHabit = (habitId: string) => {
+    const habit = appState.habits.find(h => h.id === habitId);
+    
+    setAppState(prev => ({
+      ...prev,
+      habits: prev.habits.filter(h => h.id !== habitId)
+    }));
+    
+    hapticMedium();
+    toast.success(`Habit "${habit?.name}" deleted`);
+  };
+
   const handleSaveJournal = (content: string) => {
     const today = appState.selectedDate;
     const existingEntry = appState.journalEntries.find(entry => entry.date === today);
@@ -151,6 +163,7 @@ const App = () => {
                 journalEntries={appState.journalEntries}
                 onAddHabit={handleAddHabit}
                 onToggleHabit={handleToggleHabit}
+                onDeleteHabit={handleDeleteHabit}
                 onSaveJournal={handleSaveJournal}
                 selectedDate={appState.selectedDate}
               />
